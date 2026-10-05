@@ -1,0 +1,207 @@
+@import "tailwindcss";
+@import "./effects.css";
+
+/*
+ * Design system tokens. Tailwind's default colour, font-size and radius scales
+ * are cleared so only the tokens below exist as utilities.
+ *
+ *   surface  bg-page, bg-card, bg-raised, bg-overlay
+ *   text     text-default, text-muted, text-subtle
+ *   border   border-default, border-strong
+ *   colour   text-primary, bg-secondary, text-success ... (brand + status)
+ *   type     text-2xs … text-4xl, text-display-sm/md/lg
+ *   radius   rounded-sm, rounded-md, rounded-lg
+ *   layout   max-w-page, `page-container` utility
+ */
+@theme {
+  /* ---- Colour: neutrals ---------------------------------------------- */
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Neutrals are scoped to one utility each, so `bg-page` exists but
+     `text-page` does not, and they can't clash with brand names. */
+  --background-color-page: #0b0f17; /* page background */
+  --background-color-card: #111722; /* cards, windows */
+  --background-color-raised: #182030; /* title bars, popovers */
+  --background-color-overlay: rgb(
+    11 15 23 / 0.85
+  ); /* translucent page bg for blurred sticky bars */
+
+  --text-color-default: #e2e8f0; /* body text, headings */
+  --text-color-muted: #94a3b8; /* secondary text */
+  --text-color-subtle: #64748b; /* placeholders, decorative text */
+
+  --border-color-default: #232d3f; /* dividers, card outlines */
+  --border-color-strong: #334155; /* inputs, emphasised outlines */
+
+  /* ---- Colour: brand ------------------------------------------------- */
+  --color-primary: #34d399; /* emerald: text, icons, borders on dark */
+  --color-primary-solid: #10b981; /* filled buttons */
+  --color-primary-solid-hover: #34d399;
+  --color-on-primary: #0b0f17; /* text on primary-solid */
+
+  --color-secondary: #22d3ee; /* cyan */
+  --color-tertiary: #fbbf24; /* amber */
+
+  /* ---- Colour: status ------------------------------------------------ */
+  --color-success: #4ade80;
+  --color-warning: #f59e0b;
+  --color-danger: #f87171;
+
+  /* ---- Colour: tints ------------------------------------------------- */
+  /* soft = tinted background, subtle = quiet border, strong = hover border */
+  --color-primary-soft: color-mix(
+    in srgb,
+    var(--color-primary) 10%,
+    transparent
+  );
+  --color-primary-subtle: color-mix(
+    in srgb,
+    var(--color-primary) 30%,
+    transparent
+  );
+  --color-primary-strong: color-mix(
+    in srgb,
+    var(--color-primary) 60%,
+    transparent
+  );
+
+  --color-secondary-soft: color-mix(
+    in srgb,
+    var(--color-secondary) 10%,
+    transparent
+  );
+  --color-secondary-subtle: color-mix(
+    in srgb,
+    var(--color-secondary) 30%,
+    transparent
+  );
+  --color-secondary-strong: color-mix(
+    in srgb,
+    var(--color-secondary) 60%,
+    transparent
+  );
+
+  --color-tertiary-soft: color-mix(
+    in srgb,
+    var(--color-tertiary) 10%,
+    transparent
+  );
+  --color-tertiary-subtle: color-mix(
+    in srgb,
+    var(--color-tertiary) 30%,
+    transparent
+  );
+  --color-tertiary-strong: color-mix(
+    in srgb,
+    var(--color-tertiary) 60%,
+    transparent
+  );
+
+  --color-success-soft: color-mix(
+    in srgb,
+    var(--color-success) 10%,
+    transparent
+  );
+  --color-success-subtle: color-mix(
+    in srgb,
+    var(--color-success) 30%,
+    transparent
+  );
+  --color-success-strong: color-mix(
+    in srgb,
+    var(--color-success) 60%,
+    transparent
+  );
+
+  /* ---- Typography ---------------------------------------------------- */
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: "Bebas Neue", "Oxanium", sans-serif;
+  --font-heading: "Oxanium", "JetBrains Mono", sans-serif;
+
+  --text-*: initial;
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-display-sm: 4.5rem;
+  --text-display-sm--line-height: 0.9;
+  --text-display-md: 6rem;
+  --text-display-md--line-height: 0.9;
+  --text-display-lg: 8rem;
+  --text-display-lg--line-height: 0.9;
+
+  /* ---- Radius & elevation -------------------------------------------- */
+  --radius-*: initial;
+  --radius-sm: 0.25rem; /* tags, small chips */
+  --radius-md: 0.5rem; /* buttons, inputs, links */
+  --radius-lg: 0.75rem; /* cards, windows */
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-raised: 0 16px 40px -16px rgb(0 0 0 / 0.7);
+
+  /* ---- Layout (spacing uses Tailwind's 4px scale) ---------------------- */
+  --container-page: 72rem;
+
+  /* ---- Motion -------------------------------------------------------- */
+  --animate-blink: blink 1s steps(1) infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+/* Centered page column with responsive side gutters. */
+@utility page-container {
+  @apply mx-auto w-full max-w-page px-4 sm:px-6;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-page font-mono text-default antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary-solid text-on-primary;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
