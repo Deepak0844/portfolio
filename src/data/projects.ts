@@ -15,7 +15,7 @@ export const projects: Project[] = [
     type: "Personal Project · Web",
     description:
       "A NAS-style web app to store, manage and access files online, with a React.js frontend and a Node.js backend.",
-    stack: ["React.js", "Node.js", "Express.js", "MongoDB"],
+    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "Docker"],
     repoUrl: "https://github.com/Deepak0844/cloud-drive",
     accent: "secondary",
   },

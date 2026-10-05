@@ -4,7 +4,7 @@ export const skillGroups: SkillGroup[] = [
   {
     category: "Languages",
     accent: "primary",
-    items: ["JavaScript", "TypeScript", "HTML5", "CSS3"],
+    items: ["JavaScript", "TypeScript", "HTML5", "CSS3", "Python (learning)"],
   },
   {
     category: "Frontend",
@@ -40,7 +40,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    category: "Practices",
+    category: "Performance & UX",
     accent: "secondary",
     items: [
       "Responsive Design",
@@ -53,13 +53,6 @@ export const skillGroups: SkillGroup[] = [
   {
     category: "Tools",
     accent: "tertiary",
-    items: [
-      "Git",
-      "GitHub",
-      "Docker",
-      "Agile / Scrum",
-      "Python (learning)",
-      "NGINX (learning)",
-    ],
+    items: ["Git", "GitHub", "Docker", "Agile / Scrum", "NGINX (learning)"],
   },
 ];
