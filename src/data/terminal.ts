@@ -57,10 +57,12 @@ export const terminalCommands: TerminalCommand[] = [
   {
     name: "skills",
     description: "list my tech stack",
-    run: () =>
-      skillGroups.map((g) => ({
-        text: `${g.category.padEnd(10)} ${g.items.join(", ")}`,
-      })),
+    run: () => {
+      const width = Math.max(...skillGroups.map((g) => g.category.length));
+      return skillGroups.map((g) => ({
+        text: `${g.category.padEnd(width)}  ${g.items.join(", ")}`,
+      }));
+    },
   },
   {
     name: "experience",
